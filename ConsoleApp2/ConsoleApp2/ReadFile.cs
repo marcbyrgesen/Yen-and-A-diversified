@@ -7,7 +7,7 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace ShortestPath
 {
-    public class ReadFile
+    class ReadFile
     {
         private readonly string delimiter = " ";
         public string FileName1 = @"vertices.txt";
@@ -48,12 +48,6 @@ namespace ShortestPath
                 weight[Convert.ToInt32(fields[1]), Convert.ToInt32(fields[0])]
                     = Convert.ToDouble(fields[2]);
             }
-                if(weight[61,62] != 0)
-                {
-                    Console.WriteLine(weight[61,62]);
-
-                }
-            Console.ReadKey();
         }
     }
 }

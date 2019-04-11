@@ -7,71 +7,59 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace ShortestPath
 {
-    public class Dijkstra : ReadFile
+    class Dijkstra
     {
-        public Dijkstra()
+        private int MinimumDistance(double[] distance, bool[] shortestPathTreeSet, int verticesCount)
         {
+            double min = int.MaxValue;
+            int minIndex = 0;
 
-        }
-        public Dijkstra(double [,]graph)
-        {
-            graph = weight;
-        }
-        static int V = 3366;
-        int minDistance(int[] dist,
-                bool[] sptSet)
-        {
-            int min = int.MaxValue, min_index = -1;
-
-            for (int v = 0; v < V; v++)
-                if (sptSet[v] == false && dist[v] <= min)
+            for (int v = 0; v < verticesCount; ++v)
+            {
+                if (shortestPathTreeSet[v] == false && distance[v] <= min)
                 {
-                    min = dist[v];
-                    min_index = v;
+                    min = distance[v];
+                    minIndex = v;
                 }
-
-            return min_index;
-        }
-
-        void printSolution(int[] dist, int n)
-        {
-            Console.Write("Vertex     Distance "
-                          + "from Source\n");
-            for (int i = 0; i < V; i++)
-                Console.Write(i + " \t\t " + dist[i] + "\n");
-            Console.ReadKey();
-        }
-
-        public void dijkstra(double[,] graph, int src)
-        {
-            Double[] dist = new double[V]; 
-            bool[] sptSet = new bool[V];
-
-            for (int i = 0; i < V; i++)
-            {
-                dist[i] = int.MaxValue;
-                sptSet[i] = false;
-            }
-            dist[src] = 0;
-
-            // Find shortest path for all vertices 
-            for (int count = 0; count < V - 1; count++)
-            {
-                int u = minDistance(Convert.ToInt32(dist), sptSet);
-
-                sptSet[u] = true;
-
-                for (int v = 0; v < V; v++)
-
-                    if (!sptSet[v] && graph[u, v] != 0 &&
-                         dist[u] != double.MaxValue && dist[u] + graph[u, v] < dist[v])
-                        dist[v] = Convert.ToInt32(dist[u] + graph[u, v]);
             }
 
-            // print the constructed distance array 
-            printSolution(dist, V);
+            return minIndex;
         }
 
-       
+        private static void Print(double[] distance, int verticesCount)
+        {
+            Console.WriteLine("Vertex    Distance from source");
+
+            for (int i = 0; i < verticesCount; ++i)
+                Console.WriteLine("{0}\t  {1}", i, distance[i]);
+        }
+
+        public void DijkstraAlgo(double[,] graph, int source, int verticesCount)
+        {
+            double[] distance = new double[verticesCount];
+            bool[] shortestPathTreeSet = new bool[verticesCount];
+
+            for (int i = 0; i < verticesCount; ++i)
+            {
+                distance[i] = int.MaxValue;
+                shortestPathTreeSet[i] = false;
+            }
+
+            distance[source] = 0;
+
+            for (int count = 0; count < verticesCount - 1; ++count)
+            {
+                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+                shortestPathTreeSet[u] = true;
+
+                for (int v = 0; v < verticesCount; ++v)
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                        distance[v] = distance[u] + graph[u, v];
+            }
+
+            Print(distance, verticesCount);
+        }
+
+
     }
 }

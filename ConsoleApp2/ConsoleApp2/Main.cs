@@ -7,15 +7,15 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace ShortestPath
 {
-    public class Program : ReadFile
+    class Program
     {
         static void Main(string[] args)
         {
             Console.ReadKey();
+            double[,] graph = new double[3365, 3365];
             ReadFile reader = new ReadFile();
-            double[,] graph = new double[3366, 3366];
             Dijkstra t = new Dijkstra();
-            t.dijkstra(graph, 0);
+            t.DijkstraAlgo(graph, 0, 3365);
         }
     }
 }
