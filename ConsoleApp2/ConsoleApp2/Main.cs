@@ -9,13 +9,19 @@ namespace ShortestPath
 {
     class Program
     {
+
+
         static void Main(string[] args)
         {
-            Console.ReadKey();
-            double[,] graph = new double[3365, 3365];
+            int verticesCount = 3365;
+            int[,] graph = new int[verticesCount, verticesCount];
+            int[] distance = new int[verticesCount];
             ReadFile reader = new ReadFile();
-            Dijkstra t = new Dijkstra();
-            t.DijkstraAlgo(graph, 0, 3365);
+            graph = reader.ReadEdges();
+            Dijkstra d = new Dijkstra(graph, 10, verticesCount, distance);
         }
+
     }
+
+
 }

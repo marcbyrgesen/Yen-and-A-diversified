@@ -5,20 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.FileIO;
 
+
 namespace ShortestPath
 {
     class ReadFile
     {
         private readonly string delimiter = " ";
+        private readonly string delimiter1 = ".";
         public string FileName1 = @"vertices.txt";
         public string FileName2 = @"edges.txt";
-        public int[] id = new int[10000];
-        public double[,] weight = new double[10000,10000];
+        // public int[] id = new int[10000];
+        public int[,] graph = new int[3366, 3366];
 
         public ReadFile()
         {
             //ReadVertices();
-            ReadEdges();
         }
 
         // lav struct for at organisere fuckeren bedre
@@ -35,19 +36,28 @@ namespace ShortestPath
         //    }
         //    Console.ReadKey();
         //}
-        public void ReadEdges()
+        public int[,] ReadEdges()
         {
+            int x;
+            int y;
             TextFieldParser par = new TextFieldParser(FileName2, Encoding.GetEncoding("iso-8859-1"));
             par.TextFieldType = FieldType.Delimited;
-            par.SetDelimiters(delimiter);
+            par.SetDelimiters(delimiter, delimiter1);
             while (!par.EndOfData)
             {
                 string[] fields = par.ReadFields();
-                weight[Convert.ToInt32(fields[0]), Convert.ToInt32(fields[1])]
-                    = Convert.ToDouble(fields[2]);
-                weight[Convert.ToInt32(fields[1]), Convert.ToInt32(fields[0])]
-                    = Convert.ToDouble(fields[2]);
+                x = Convert.ToInt32(fields[0]);
+                y = Convert.ToInt32(fields[1]);
+                graph[y, x] = Convert.ToInt32(fields[2]);
+                graph[x, y] = Convert.ToInt32(fields[2]);
             }
+
+            for (int i = 0; i < 0; i++)
+            {
+                if(graph[i, 1] != 0)
+                    Console.WriteLine(graph[i, 1]);
+            }
+            return graph;
         }
     }
 }

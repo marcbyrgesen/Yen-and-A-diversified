@@ -9,9 +9,14 @@ namespace ShortestPath
 {
     class Dijkstra
     {
-        private int MinimumDistance(double[] distance, bool[] shortestPathTreeSet, int verticesCount)
+        public Dijkstra(int[,] graph, int source, int verticesCount, int[] distance)
         {
-            double min = int.MaxValue;
+            DijkstraAlgo(graph, source, verticesCount);
+            
+        }
+        private int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
+        {
+            int min = int.MaxValue;
             int minIndex = 0;
 
             for (int v = 0; v < verticesCount; ++v)
@@ -26,17 +31,19 @@ namespace ShortestPath
             return minIndex;
         }
 
-        private static void Print(double[] distance, int verticesCount)
+        private void Print(int[] distance, int verticesCount)
         {
             Console.WriteLine("Vertex    Distance from source");
 
             for (int i = 0; i < verticesCount; ++i)
                 Console.WriteLine("{0}\t  {1}", i, distance[i]);
+            Console.ReadKey();
         }
 
-        public void DijkstraAlgo(double[,] graph, int source, int verticesCount)
+        private void DijkstraAlgo(int[,] graph, int source, int verticesCount)
         {
-            double[] distance = new double[verticesCount];
+         
+            int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
 
             for (int i = 0; i < verticesCount; ++i)
@@ -53,13 +60,14 @@ namespace ShortestPath
                 shortestPathTreeSet[u] = true;
 
                 for (int v = 0; v < verticesCount; ++v)
-                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) &&
+                        distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                    {
                         distance[v] = distance[u] + graph[u, v];
+                    }
+                        
             }
-
             Print(distance, verticesCount);
         }
-
-
     }
 }
