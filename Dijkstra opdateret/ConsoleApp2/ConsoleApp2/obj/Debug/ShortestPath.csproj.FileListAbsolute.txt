@@ -12,3 +12,10 @@ C:\Users\Byrge\Desktop\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\
 C:\Users\Byrge\Desktop\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csproj.CoreCompileInputs.cache
 C:\Users\Byrge\Desktop\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.exe
 C:\Users\Byrge\Desktop\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe.config
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.pdb
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csprojAssemblyReference.cache
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csproj.CoreCompileInputs.cache
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.exe
+C:\Users\Byrge\Desktop\Dijkstra opdateret\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
