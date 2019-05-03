@@ -26,8 +26,6 @@ namespace ShortestPath
                 Dijkstra d = new Dijkstra(graph, source, dest, verticesCount, distance);
             }
 
-            // Yen
-            int[] lowerBoundInput = new int[distance[verticesCount]];
 
         }
 

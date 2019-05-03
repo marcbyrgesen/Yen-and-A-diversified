@@ -9,8 +9,15 @@ namespace ShortestPath
     class Yen : Dijkstra
     {
 
-        public Yen()
+        public static void YensAlgo(int[,] graph, int source, int dest, int verticesCount, int[] distance)
         {
+
+            List<int> CandidatePaths = new List<int>();
+
+            for (int i = 0; i < verticesCount; i++)
+            {
+
+            }
 
         }
 

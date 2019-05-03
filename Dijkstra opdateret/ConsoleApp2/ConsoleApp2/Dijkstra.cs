@@ -30,9 +30,25 @@ namespace ShortestPath
                 {
                     min = distance[v];
                     minIndex = v;
+
                 }
             }
             return minIndex;
+        }
+
+        public int SortSP(int[] pathway, int[] sPathArray, int verticesCount, int desti, int k, int s)
+        {
+            Console.WriteLine("from: " + desti + "to: " + pathway[desti]); //fghhgffhghfg
+            sPathArray[k] = pathway[desti];
+            k++;
+            desti = pathway[desti];
+            if (desti == s)
+            {
+                desti = -1;
+            }
+            Console.ReadKey();
+            return desti;
+
         }
 
         public static void Print(int[] distance, int dest, int source, int verticesCount)
@@ -48,20 +64,26 @@ namespace ShortestPath
             Console.ReadKey();
         }
 
-        private static void DijkstraAlgo(int[,] graph, int source, int dest, int verticesCount)
+        private void DijkstraAlgo(int[,] graph, int source, int dest, int verticesCount)
         {
+            int pH;
+            int k = 0;
             int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
+            int[] pathWay = new int[verticesCount];
+            int[] shortestPathArray = new int[verticesCount];
 
             for (int i = 0; i < verticesCount; ++i)
             {
                 distance[i] = int.MaxValue;
                 shortestPathTreeSet[i] = false;
             }
+
             distance[source] = 0;
 
-            for (int count = 0; count < verticesCount; ++count)
+            for (int count = 0; count < verticesCount - 1; ++count)
             {
+                pH = 0;
                 int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
                 shortestPathTreeSet[u] = true;
 
@@ -70,27 +92,28 @@ namespace ShortestPath
                         distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
                     {
                         distance[v] = distance[u] + graph[u, v];
+                        pH++;
                     }
-
-                /*
-                ArrayList cc = new ArrayList();
-                cc.Add(v);
-                int c = cc.Count;
-                Console.WriteLine(c);
-                */
-
             }
             Print(distance, dest, source, verticesCount);
+            SortSP(pathWay, shortestPathArray, verticesCount, dest, k, distance[source]);
+            Yen(graph, source, dest, verticesCount, distance);
         }
 
         public static void Yen(int[,] graph, int source, int dest, int verticesCount, int[] distance)
         {
-
+            int lowerBoundInput = distance[dest];
             List<int> CandidatePaths = new List<int>();
+            CandidatePaths.Add(lowerBoundInput);
+            bool emptyList = !CandidatePaths.Any();
 
-            for (int i = 0; i < verticesCount; i++)
+            if (emptyList == false)
             {
-
+                for (int i = 1; i < 2; i++)
+                {
+                    Console.WriteLine(CandidatePaths[0]);
+                    Console.ReadKey();
+                }
             }
 
         }
