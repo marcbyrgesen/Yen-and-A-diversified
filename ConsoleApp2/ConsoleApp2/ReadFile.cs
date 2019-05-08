@@ -51,12 +51,6 @@ namespace ShortestPath
                 graph[y, x] = Convert.ToInt32(fields[2]);
                 graph[x, y] = Convert.ToInt32(fields[2]);
             }
-
-            for (int i = 0; i < 0; i++)
-            {
-                if(graph[i, 1] != 0)
-                    Console.WriteLine(graph[i, 1]);
-            }
             return graph;
         }
     }

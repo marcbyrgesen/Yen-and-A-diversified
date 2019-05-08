@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DijkstraA.cs" />
     <Compile Include="ReadFile.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Dijkstra.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
