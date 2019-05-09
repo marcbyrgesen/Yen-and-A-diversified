@@ -15,7 +15,6 @@ namespace ShortestPath
         {
             int verticesCount = 3365;
             int[,] graph = new int[verticesCount, verticesCount];
-            int[] distance = new int[verticesCount];
             ReadFile reader = new ReadFile();
 
             for (int i = 0; i < 1000; i++)
@@ -26,7 +25,7 @@ namespace ShortestPath
                 int dest = rnd.Next(1, 3366);
                 Console.WriteLine(source);
                 Console.WriteLine(dest);
-                Dijkstra d = new Dijkstra(graph, source, dest, verticesCount, distance);
+                Dijkstra d = new Dijkstra(graph, source, dest, verticesCount);
                 Console.ReadKey();
             }
 
