@@ -9,6 +9,7 @@ namespace ShortestPath
 {
     class Dijkstra
     {
+
         public Dijkstra(int[,] graph, int source, int dest, int verticesCount)
         {
             Yen(graph, source, dest, verticesCount);
@@ -34,16 +35,13 @@ namespace ShortestPath
         {
             int[] sPathArray = new int[verticesCount];
             int d = desti;
-            bool notSource = true;
             int m = 0;
             while (s != desti)
             {
-                if (notSource)
-                {
-                    sPathArray[m] = pathway[desti];
+                if(pathway[desti] != int.MaxValue)
+                    sPathArray[m] = pathway[desti]; // indekset lå udenfor matrixens grænser
                     m++;
                     desti = pathway[desti];
-                }
             }
             int[] PathArray = new int[m+1];
             int reverse = m;
@@ -56,9 +54,8 @@ namespace ShortestPath
             return PathArray;
         }
 
-        public int[] DijkstraAlgo(int[,] graph, int source, int dest, int verticesCount)
+        public int[] DijkstraAlgo(int[,] graph, int source, int dest, int verticesCount, int[] distance)
         {
-            int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
             int[] pathWay = new int[verticesCount];
             int[] shortestPathArray = new int[verticesCount];
@@ -71,12 +68,12 @@ namespace ShortestPath
 
             distance[source] = 0;
 
-            for (int count = 0; count < verticesCount - 1; ++count)
+            for (int count = 0; count < verticesCount - 1; count++)
             {
                 int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
                 shortestPathTreeSet[u] = true;
 
-                for (int v = 0; v < verticesCount; ++v)
+                for (int v = 0; v < verticesCount; v++)
                 {
                     if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) &&
                         distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
@@ -93,40 +90,74 @@ namespace ShortestPath
 
         }
 
+        // tilføj distance
         public void Yen(int[,] graph, int source, int dest, int verticesCount)
         {
-            int[] dijkPath = DijkstraAlgo(graph, source, dest, verticesCount);
+            int[] distance = new int[verticesCount];
+            int[] dijkPath = DijkstraAlgo(graph, source, dest, verticesCount, distance);
+            for (int i = 0; i < dijkPath.Length - 2; i++)
+                Console.WriteLine(dijkPath[i]);
+
             int spurNode;
-            int[] rootPath = new int[dijkPath.Length+1];
-            int[,] g = graph;
+            int[] rootPath = new int[dijkPath.Length];
             List<int> CandidatePaths = new List<int>();
             for (int k = 1; k < 5; k++)
             {
                 for (int i = 0; i < dijkPath.Length - 2; i++)
                 {
-                    spurNode = dijkPath[k - 1];
+                    int[,] tempGraph = graph;
+                    spurNode = dijkPath[i+1];
+                    Console.WriteLine(spurNode);
 
-                    Console.WriteLine();
-                    for (int j = 1; j < i; j++)
+                    for (int j = 0; j <= i; j++)
                     {
-                        rootPath[j - 1] = dijkPath[j];
-                        Console.WriteLine(rootPath[j - 1]);
+                            rootPath[j] = dijkPath[j+1];
                     }
 
-                    for (int n = 0; n < dijkPath.Length - 1; n++)                        // bedre midte?
+                    // hele dette loop overflødigt?
+                    for(int p = 0; p < i; p++)                        // bedre condition?
                     {
-                        if (spurNode != g[rootPath[n], rootPath[n + 1]] || spurNode != g[rootPath[n + 1], rootPath[n]]) { }
-                        g[rootPath[n], rootPath[n + 1]] = 0;
-                        g[rootPath[n + 1], rootPath[n]] = 0;
-                    } // mulig mangel, andet for each loop i pseudo
+                        //if(p<=i)
+                        Console.WriteLine("p: " + rootPath[p] + " " + rootPath[p+1]);
+                        Console.WriteLine(spurNode);
+                        // muligt if statement her
+                        tempGraph[rootPath[p], rootPath[p+1]] = 0;
+                        tempGraph[rootPath[p+1], rootPath[p]] = 0;
+                    }
 
-                    int[] spurPath = DijkstraAlgo(g, spurNode, dest, verticesCount);
-                    int[] totalpath = rootPath + spurPath; // check om den cutter den af det rigtige sted
-                    List<int> pong = rootPath + spurPath;
+                    //for(int r = 0; r < verticesCount; r++)
+                    //{
+                    //    for(int n = 0; n < i; n++)
+                    //    if(r == rootPath[i] || n == rootPath[i])
+                    //    {
+                    //        tempGraph[n, r] = 0;
+                    //        tempGraph[r, n] = 0;
+                    //    }
+                    //}
+                    string[] totalpath = new string[7];
+                    int[] spurDijkPath = DijkstraAlgo(tempGraph, spurNode, dest, verticesCount, distance);
+                    string[] totalPath = Array.ConvertAll(rootPath, ele => ele.ToString());
+                    totalPath = Array.ConvertAll(spurDijkPath, ele => ele.ToString());
+                    Console.WriteLine(string.Join(", ", totalPath));
+                    totalPath = Array.ConvertAll(rootPath, ele => ele.ToString());
+                    Console.WriteLine(string.Join(", ", totalPath));
+                    Console.ReadLine();
+                    //for (int a = 0; true; a++)
+                    //{
+
+                    //    //if (a < rootPath.Length)
+                    //    //    totalpath[a] = IntArrayToString(rootPath[a]);
+
+                    //    //totalpath = spurPath;
+                    //}
                 }
 
             }
 
+        }
+        public string IntArrayToString(int[] ints)
+        {
+            return string.Join(",", ints.Select(x => x.ToString()).ToArray());
         }
     }
 

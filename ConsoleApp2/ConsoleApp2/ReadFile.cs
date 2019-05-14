@@ -22,7 +22,6 @@ namespace ShortestPath
             //ReadVertices();
         }
 
-        // lav struct for at organisere fuckeren bedre
         //public void ReadVertices()
         //{
         //    TextFieldParser par = new TextFieldParser(FileName1, Encoding.GetEncoding("iso-8859-1"));
