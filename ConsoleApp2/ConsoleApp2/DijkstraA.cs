@@ -10,7 +10,7 @@ namespace ShortestPath
     class Dijkstra
     {
 
-        public Dijkstra(int[,] graph, int source, int dest, int verticesCount)
+        public Dijkstra(LinkedList<Vertex> graph, int source, int dest, int verticesCount)
         {
             Yen(graph, source, dest, verticesCount);
         }
@@ -54,7 +54,7 @@ namespace ShortestPath
             return PathArray;
         }
 
-        public int[] DijkstraAlgo(int[,] graph, int source, int dest, int verticesCount, int[] distance)
+        public int[] DijkstraAlgo(LinkedList<Vertex> graph, int source, int dest, int verticesCount, int[] distance)
         {
             bool[] shortestPathTreeSet = new bool[verticesCount];
             int[] pathWay = new int[verticesCount];
@@ -75,7 +75,7 @@ namespace ShortestPath
 
                 for (int v = 0; v < verticesCount; v++)
                 {
-                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) &&
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph) &&
                         distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
                     {
                         distance[v] = distance[u] + graph[u, v];
@@ -91,7 +91,7 @@ namespace ShortestPath
         }
 
         // tilføj distance
-        public void Yen(int[,] graph, int source, int dest, int verticesCount)
+        public void Yen(LinkedList<Vertex> graph, int source, int dest, int verticesCount)
         {
             int[] distance = new int[verticesCount];
             int[] dijkPath = DijkstraAlgo(graph, source, dest, verticesCount, distance);
@@ -105,7 +105,7 @@ namespace ShortestPath
             {
                 for (int i = 0; i < dijkPath.Length - 2; i++)
                 {
-                    int[,] tempGraph = graph;
+                    LinkedList<Vertex> tempGraph = graph;
                     spurNode = dijkPath[i+1];
                     Console.WriteLine(spurNode);
 
@@ -128,7 +128,7 @@ namespace ShortestPath
                     //for(int r = 0; r < verticesCount; r++)
                     //{
                     //    for(int n = 0; n < i; n++)
-                    //    if(r == rootPath[i] || n == rootPath[i])
+                    //    if(r == rootPath[i] || n == rootPath[i]) // spurnode
                     //    {
                     //        tempGraph[n, r] = 0;
                     //        tempGraph[r, n] = 0;

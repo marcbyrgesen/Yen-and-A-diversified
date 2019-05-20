@@ -14,7 +14,7 @@ namespace ShortestPath
         static void Main(string[] args)
         {
             int verticesCount = 3365;
-            int[,] graph = new int[verticesCount, verticesCount];
+            LinkedList<Vertex> graph = new LinkedList<Vertex>();
             ReadFile reader = new ReadFile();
 
             for (int i = 0; i < 1000; i++)
