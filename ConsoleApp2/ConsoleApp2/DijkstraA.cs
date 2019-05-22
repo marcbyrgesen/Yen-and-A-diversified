@@ -9,11 +9,6 @@ namespace ShortestPath
 {
     class Dijkstra
     {
-
-        public Dijkstra(Vertex[] graph, int source, int dest, int verticesCount)
-        {            //Yen(graph, source, dest, verticesCount);
-            DijkstraAlgo(graph, source, dest, verticesCount);
-        }
         private int MinimumDistance(Vertex[] graph, int verticesCount, int dest)
         {
             int min = int.MaxValue;
@@ -55,10 +50,12 @@ namespace ShortestPath
             return PathArray;
         }
 
-        public void DijkstraAlgo(Vertex[] graph, int source, int dest, int verticesCount)
+        public Tuple<int, int> DijkstraAlgo(Vertex[] graph, int source, int dest, int verticesCount)
         {
             int[] pathWay = new int[verticesCount];
             int[] shortestPathArray = new int[verticesCount];
+            int visitedVertices = 0;
+            int totalDistance = 0;
 
             for (int i = 0; i < verticesCount; ++i)
             {
@@ -71,6 +68,11 @@ namespace ShortestPath
             for (int count = 0; count < verticesCount - 1; count++)
             {
                 int u = MinimumDistance(graph, verticesCount, dest);
+                if (dest == u)
+                {
+                    totalDistance = graph[count].distance;
+                    break;
+                }
                 graph[u].shortestPathTreeSet = true;
                 foreach(Neighbor neighbor in graph[u].neighbor)
                 {
@@ -83,15 +85,14 @@ namespace ShortestPath
                         pathWay[neighbor.node] = u;
                     }
                 }
-                if(dest == u)
-                {
-                    break;
-                }
+                visitedVertices++;
             }
-           // Console.WriteLine("Shortest path from {0} to {1} is dist: {2}", source, dest, graph[dest].distance);
+            
+            Tuple<int, int> result = new Tuple<int, int>(visitedVertices, totalDistance);
+            //Console.WriteLine("Shortest path from {0} to {1} is dist: {2}", source, dest, graph[dest].distance);
 
             //shortestPathArray = SortSP(pathWay, verticesCount, dest, source);
-            // return shortestPathArray;
+            return result;
 
         }
 

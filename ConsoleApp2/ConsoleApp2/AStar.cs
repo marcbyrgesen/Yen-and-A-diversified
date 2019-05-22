@@ -58,10 +58,12 @@ namespace ShortestPath
         //    return PathArray;
         //}
 
-        public void DijkstraAlgo(Vertex[] graph, int source, int dest, int verticesCount)
+        public Tuple<int, int> DijkstraAlgo(Vertex[] graph, int source, int dest, int verticesCount)
         {
             int[] pathWay = new int[verticesCount];
             int[] shortestPathArray = new int[verticesCount];
+            int totalDistance = 0;
+            int visitedVertices = 0;
 
             for (int i = 0; i < verticesCount; ++i)
             {
@@ -74,6 +76,11 @@ namespace ShortestPath
             for (int count = 0; count < verticesCount - 1; count++)
             {
                 int u = MinimumDistance(graph, verticesCount, dest);
+                if (dest == u)
+                {
+                    totalDistance = graph[count].distance;
+                    break;
+                }
                 graph[u].shortestPathTreeSet = true;
                 foreach (Neighbor neighbor in graph[u].neighbor)
                 {
@@ -86,16 +93,14 @@ namespace ShortestPath
                         pathWay[neighbor.node] = u;
                     }
                 }
-                if (dest == u)
-                {
-                    break;
-                }
+                visitedVertices++;
             }
-           // Console.WriteLine("Shortest path from {0} to {1} is dist: {2}", source, dest, graph[dest].distance);
+            // Console.WriteLine("Shortest path from {0} to {1} is dist: {2}", source, dest, graph[dest].distance);
 
             //shortestPathArray = SortSP(pathWay, verticesCount, dest, source);
             // return shortestPathArray;
-
+            Tuple<int, int> result = new Tuple<int, int>(visitedVertices, totalDistance);
+            return result;
         }
     }
 }

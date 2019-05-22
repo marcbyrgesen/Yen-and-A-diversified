@@ -5,3 +5,10 @@ C:\Users\jeppe\source\repos\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.cspro
 C:\Users\jeppe\source\repos\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csproj.CoreCompileInputs.cache
 C:\Users\jeppe\source\repos\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.exe
 C:\Users\jeppe\source\repos\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe.config
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.pdb
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csprojAssemblyReference.cache
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ShortestPath.csproj.CoreCompileInputs.cache
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.exe
+C:\Users\jeppe\Downloads\Yen-and-A-diversified-master\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
