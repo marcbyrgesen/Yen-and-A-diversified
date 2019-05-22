@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.FileIO;
+using System.Diagnostics;
 
 namespace ShortestPath
 {
@@ -13,22 +14,39 @@ namespace ShortestPath
 
         static void Main(string[] args)
         {
-            int verticesCount = 3365;
-            LinkedList<Vertex> graph = new LinkedList<Vertex>();
-            ReadFile reader = new ReadFile();
 
+            int verticesCount = 3365;
+            Vertex[] V = new Vertex[verticesCount+1];
+            ReadFile reader = new ReadFile();
+            reader.ReadVertices(V);
+            reader.ReadEdges(V);
+            int[] source = new int[1000];
+            int[] dest = new int[1000];
             for (int i = 0; i < 1000; i++)
             {
-                graph = reader.ReadEdges();
                 Random rnd = new Random();
-                int source = rnd.Next(1, 3366);
-                int dest = rnd.Next(1, 3366);
-                Console.WriteLine(source);
-                Console.WriteLine(dest);
-                Dijkstra d = new Dijkstra(graph, source, dest, verticesCount);
-                Console.ReadKey();
+                source[i] = rnd.Next(0, 3365);
+                dest[i] = rnd.Next(0, 3365);
             }
+            var s1 = Stopwatch.StartNew();
+            for (int j = 0; j < 1000; j++)
+            {
+                Dijkstra d = new Dijkstra(V, source[j], dest[j], verticesCount);
 
+            }
+            s1.Stop();
+
+            Console.WriteLine("Time for Dijkstra: " + s1.Elapsed.TotalMilliseconds);
+            var s2 = Stopwatch.StartNew();
+            for (int j = 0; j < 1000; j++)
+            {
+                AStar d = new AStar(V, source[j], dest[j], verticesCount);
+
+            }
+            s2.Stop();
+            Console.WriteLine("Time for Astar: " + s2.Elapsed.TotalMilliseconds);
+            Console.ReadLine();
+            Console.ReadKey();
         }
 
     }

@@ -11,12 +11,10 @@ namespace ShortestPath
     public class Neighbor
     {
         public int node;
-        public int next;
         public int weight;
-        public Neighbor(int _node, int _next, int _weight)
+        public Neighbor(int _node, int _weight)
         {
             this.node = _node;
-            this.next = _next;
             this.weight = _weight;
         }
     }
@@ -24,11 +22,21 @@ namespace ShortestPath
     {
         public int node;
         public int distance;
-        Neighbor neighbor;
-        public Vertex(int _node, Neighbor _neighbor)
+        public double x;
+        public double y;
+        public List<Neighbor> neighbor = new List<Neighbor>();
+        public bool shortestPathTreeSet;
+
+        public Vertex()
         {
-            this.node = _node;
-            this.neighbor = _neighbor;
+
+        }
+
+        public Vertex(int _node, double _x, double _y)
+        {
+            node = _node;
+            x = _x;
+            y = _y;
         }
     }
     class ReadFile
@@ -37,28 +45,32 @@ namespace ShortestPath
         private readonly string delimiter1 = ".";
         public string FileName1 = @"vertices.txt";
         public string FileName2 = @"edges.txt";
-        LinkedList<Vertex> V = new LinkedList<Vertex>();
-        // public int[] id = new int[10000];
 
         public ReadFile()
         {
-            //ReadVertices();
+
         }
 
-        //public void ReadVertices()
-        //{
-        //    TextFieldParser par = new TextFieldParser(FileName1, Encoding.GetEncoding("iso-8859-1"));
-        //    par.TextFieldType = FieldType.Delimited;
-        //    par.SetDelimiters(delimiter);
-        //    for (int i = 0; !par.EndOfData; i++)
-        //    {
-        //        string[] fields = par.ReadFields();
-        //        id[i] = Convert.ToInt32(fields[0]);
-        //        Console.WriteLine(id[i]);
-        //    }
-        //    Console.ReadKey();
-        //}
-        public LinkedList<Vertex> ReadEdges()
+        public Vertex[] ReadVertices(Vertex[] V)
+        {
+            TextFieldParser par = new TextFieldParser(FileName1, Encoding.GetEncoding("iso-8859-1"));
+            par.TextFieldType = FieldType.Delimited;
+            par.SetDelimiters(delimiter);
+            while (!par.EndOfData)
+            {
+                string[] fields = par.ReadFields();
+
+                int id = Convert.ToInt32(fields[0]);
+                double x = Convert.ToDouble(fields[1]);
+                double y = Convert.ToDouble(fields[2]);
+                Vertex temp = new Vertex(id, x, y);
+                V[id] = temp;
+                
+            }
+            Console.ReadKey();
+            return V;
+        }
+        public Vertex[] ReadEdges(Vertex[] V)
         {
             TextFieldParser par = new TextFieldParser(FileName2, Encoding.GetEncoding("iso-8859-1"));
             par.TextFieldType = FieldType.Delimited;
@@ -70,13 +82,12 @@ namespace ShortestPath
                 int v2 = Convert.ToInt32(fields[1]);
                 int weight = Convert.ToInt32(fields[2]);
 
-                Neighbor n = new Neighbor(v1, v2, weight);
-                Vertex temp = new Vertex(v1, n);
-                V.AddLast(temp);
+                Neighbor n = new Neighbor(v2, weight);
 
-                n = new Neighbor(v2, v1, weight);
-                temp = new Vertex(v2, n);
-                V.AddLast(temp);
+                V[v1].neighbor.Add(n);
+                n = new Neighbor(v1, weight);
+                V[v2].neighbor.Add(n);
+
 
             }
             return V;

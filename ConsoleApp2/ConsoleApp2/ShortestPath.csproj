@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AStar.cs" />
     <Compile Include="DijkstraA.cs" />
     <Compile Include="ReadFile.cs" />
     <Compile Include="Main.cs" />
